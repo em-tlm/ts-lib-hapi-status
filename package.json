@@ -1,0 +1,33 @@
+{
+  "name": "ts-hapi-status",
+  "longName": "ts-hapi-status",
+  "description": "Hapi.js plugin for reporting on service status.",
+  "version": "1.0.0",
+  "dependencies": {
+    "bluebird": "^3.5.0"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "eslint": "^3.19.0",
+    "eslint-config-tetrascience": "tetrascience/eslint-config-tetrascience",
+    "hapi": "^16.5.0",
+    "mocha": "^3.4.2",
+    "nyc": "^11.0.3"
+  },
+  "keywords": [
+    "hapi",
+    "status",
+    "plugin"
+  ],
+  "license": "MIT",
+  "main": "./lib",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tetrascience/ts-lib-hapi-status"
+  },
+  "scripts": {
+    "lint": "eslint ./*",
+    "test": "NODE_ENV=test nyc --reporter=lcov  --reporter=text mocha --recursive ./test"
+  }
+}
