@@ -1,35 +1,23 @@
+/* eslint new-cap:0 */
+
 const assert = require('chai').assert;
-const hapi = require('hapi');
+const Hapi = require('hapi');
 
-const status = require('../../lib');
-
+const lib = require('../../lib');
 
 describe('/status', () => {
-  beforeEach(function() {
-    this.server = new hapi.Server();
-    this.server.connection({ port: 8000 });
-    this.server.register(status);
+  beforeEach(async function() {
+    this.server = new Hapi.server({ port: 8000 });
+
+    await this.server.register({
+      plugin: lib,
+    });
+
+    await this.server.start();
   });
 
-  it('should return a 204 response code', function(done) {
-    this.server.inject('/status')
-      .then((res) => {
-        assert.strictEqual(res.statusCode, 204);
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
-  it('should return an empty payload', function(done) {
-    this.server.inject('/status')
-      .then((res) => {
-        assert.isUndefined(res.source);
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
+  it('should return a 200 response code', async function() {
+    const response = await this.server.inject('/status');
+    assert.strictEqual(response.statusCode, 200);
   });
 });
